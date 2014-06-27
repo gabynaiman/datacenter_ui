@@ -1,0 +1,58 @@
+table
+  tr
+    td Name
+    td= machine.name
+  tr
+    td IPs
+    td= machine.ips.join(', ')
+  tr
+    td CPU
+    td= machine.cpu
+  tr
+    td Cores
+    td= machine.cores
+  tr
+    td Memory
+    td
+      table
+        tr
+          td Total
+          td Free
+          td Used
+        tr
+          td #{gb(machine.memory)} GB
+          td #{gb(machine.memory_free)} GB
+          td #{gb(machine.memory_used)} GB
+  tr
+    td Swap
+    td
+      table
+        tr
+          td Total
+          td Free
+          td Used
+        tr
+          td #{gb(machine.swap)} GB
+          td #{gb(machine.swap_free)} GB
+          td #{gb(machine.swap_used)} GB
+  tr
+    td Disk
+    td
+      table
+        tr
+          td Mounted on
+          td % Used
+          td Size
+          td Free
+          td Used
+          td Type
+          td Filesystem
+        - machine.disk_partitions.each do |partition|
+          tr
+            td= partition.mounted
+            td= partition.used_percentage
+            td #{gb(partition.size)} GB
+            td #{gb(partition.available)} GB
+            td #{gb(partition.used)} GB
+            td= partition.type
+            td= partition.filesystem
