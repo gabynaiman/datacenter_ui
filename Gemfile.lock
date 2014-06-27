@@ -16,6 +16,8 @@ GEM
       coderay (~> 1.0)
       method_source (~> 0.8)
       slop (~> 3.4)
+    puma (2.8.2)
+      rack (>= 1.1, < 2.0)
     rack (1.5.2)
     shotgun (0.9)
       rack (>= 1.0)
@@ -33,6 +35,7 @@ DEPENDENCIES
   cuba
   datacenter (~> 0.0)!
   pry
+  puma
   shotgun
   slim
   tilt
