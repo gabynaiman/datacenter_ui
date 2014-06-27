@@ -1,5 +1,30 @@
-ul
-  - machines.each do |machine|
-    li
-      a href='/machine/#{machine}'= machine
-  
+- machines.each do |machine|
+  .panel.panel-info id='#{machine}'
+    .panel-heading
+      strong= machine
+      .pull-right
+        i.fa.fa-refresh style='cursor:pointer'
+    .panel-body
+
+javascript:
+  $(function() {
+    
+    $('.panel').each(function(i,e) {
+      loadMachine(e.id);
+    });
+
+    $('.fa-refresh').on('click', function() {
+      var machine = $(this).closest('.panel').attr('id');
+      loadMachine(machine);
+    });
+
+    function loadMachine(machine) {
+      $('#' + machine).find('.fa-refresh').addClass('fa-spin');
+      $('#' + machine).find('.panel-body').slideUp();
+      $.get('/machine/' + machine, function(html) {
+        $('#' + machine).find('.fa-refresh').removeClass('fa-spin');
+        $('#' + machine).find('.panel-body').html(html).slideDown();
+      });
+    }
+
+  });

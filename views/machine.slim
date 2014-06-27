@@ -1,58 +1,69 @@
-table
-  tr
-    td Name
-    td= machine.name
-  tr
-    td IPs
-    td= machine.ips.join(', ')
-  tr
-    td CPU
-    td= machine.cpu
-  tr
-    td Cores
-    td= machine.cores
-  tr
-    td Memory
-    td
-      table
-        tr
-          td Total
-          td Free
-          td Used
-        tr
-          td #{gb(machine.memory)} GB
-          td #{gb(machine.memory_free)} GB
-          td #{gb(machine.memory_used)} GB
-  tr
-    td Swap
-    td
-      table
-        tr
-          td Total
-          td Free
-          td Used
-        tr
-          td #{gb(machine.swap)} GB
-          td #{gb(machine.swap_free)} GB
-          td #{gb(machine.swap_used)} GB
-  tr
-    td Disk
-    td
-      table
-        tr
-          td Mounted on
-          td % Used
-          td Size
-          td Free
-          td Used
-          td Type
-          td Filesystem
-        - machine.disk_partitions.each do |partition|
-          tr
-            td= partition.mounted
-            td= partition.used_percentage
-            td #{gb(partition.size)} GB
-            td #{gb(partition.available)} GB
-            td #{gb(partition.used)} GB
-            td= partition.type
-            td= partition.filesystem
+.form-horizontal
+  .row-fluid
+    .col-sm-6
+      .form-group
+        label.col-sm-2 Name
+        .col-sm-10= machine.name
+      .form-group
+        label.col-sm-2 IPs
+        .col-sm-10= machine.ips.join(', ')
+      .form-group
+        label.col-sm-2 CPU
+        .col-sm-10= machine.cpu
+      .form-group
+        label.col-sm-2 Processors
+        .col-sm-10= machine.cores
+    .col-sm-6
+      .form-group
+        label.col-sm-2 Memory
+        .col-sm-10
+          table.table-condensed
+            thead
+              tr
+                th Total
+                th Free
+                th Used
+            tbody
+              tr
+                td #{gb(machine.memory)} GB
+                td #{gb(machine.memory_free)} GB
+                td #{gb(machine.memory_used)} GB
+      .form-group
+        label.col-sm-2 Swap
+        .col-sm-10
+          table.table-condensed
+            thead
+              tr
+                th Total
+                th Free
+                th Used
+            tbody
+              tr
+                td #{gb(machine.swap)} GB
+                td #{gb(machine.swap_free)} GB
+                td #{gb(machine.swap_used)} GB
+  .row-fluid
+    .col-sm-10
+      .form-group
+        label.col-sm-2 Disk
+        .col-sm-10
+          table.table-condensed.col-sm-10
+            thead
+              tr
+                th Mounted on
+                th % Used
+                th Size
+                th Free
+                th Used
+                th Type
+                th Filesystem
+            tbody
+              - machine.disk_partitions.each do |partition|
+                tr
+                  td= partition.mounted
+                  td= partition.used_percentage
+                  td #{gb(partition.size)} GB
+                  td #{gb(partition.available)} GB
+                  td #{gb(partition.used)} GB
+                  td= partition.type
+                  td= partition.filesystem
