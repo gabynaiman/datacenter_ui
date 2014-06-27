@@ -1,5 +1,6 @@
 require 'datacenter'
 require 'cuba'
+require 'slim'
 require 'cuba/render'
 require 'yaml'
 
